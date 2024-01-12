@@ -1,11 +1,16 @@
+
+
+
 <script setup>
 
 const ip = '192.168.1.3'
 //const ip = 'www.servertrancas.duckdns.org'
 const port = 3005
 
+const id=ref($route.params.idliq)
+
 const { data: liq, pending, error } = await useFetch(
-    `http://${ip}:${port}/api/view/personaCargoLiq?CargoId=65&sort={"CODIGO":"asc","SUBCODIGO":"asc"}`
+    `http://${ip}:${port}/api/view/personaCargoLiq?CargoId=${id}&sort={"CODIGO":"asc","SUBCODIGO":"asc"}`
     //`http://www.servertrancas.duckdns.org:3005/api/view/personaCargoLiq?CargoId=65&sort={"CODIGO":"asc","SUBCODIGO":"asc"}`
     // `https://api.example.com/projects/${projectId}/tracks` 
 )

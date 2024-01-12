@@ -1,7 +1,12 @@
 <script setup>
 
+const ip = '192.168.1.3' //www.servertrancas.duckdns.org
+//const ip = 'www.servertrancas.duckdns.org'
+const port = 3005
+
 const { data: liqs, pending, error } = await useFetch(
-    `http://www.servertrancas.duckdns.org:3005/api/view/boletas?Periodo=1/12/2023&TipoLiquidacionId=1&GrupoAdicionalId=0`
+    `http://${ip}:${port}/api/view/boletas?Periodo=1/12/2023&TipoLiquidacionId=1&GrupoAdicionalId=0`
+    //`http://${ip}:${port}/api/view/boletas?Periodo=1/12/2023&TipoLiquidacionId=1&GrupoAdicionalId=0`
     // `https://api.example.com/projects/${projectId}/tracks`
 )
 
@@ -25,9 +30,6 @@ const columns = [{
 {
     key: 'APELLIDO',
     label: 'Apellido'
-},
-{
-    key: 'NETO',
 }
 ]
 
@@ -57,6 +59,8 @@ const rows = computed(() => {
 
 const select = (item)=>{
     console.log(item)
+    console.log(item.LIQUIDACIONID)   
+    navigateTo(`/liqitem-${item.LIQUIDACIONID}`)
 }
 
 </script>
