@@ -1,16 +1,39 @@
+<script setup>
+const isAuthenticated = useCookie('is-authenticated')
+</script>
+
 <template>
-    <UCard>
-        <template #header>
-            <Header></Header>
-        </template>
+    <header>
+        <UContainer>
+            <Header>
+                <Navigation v-if="isAuthenticated" />
+            </Header>
+        </UContainer>
+    </header>
+    <main>
+        <UContainer>            
+            <LoginForm v-if="!isAuthenticated"></LoginForm>
+            <slot v-else />
+        </UContainer>
+    </main>
+    <footer>
 
-        <div >
-            <slot></slot>
-        </div>
-
-
-        <template #footer>
-            <div class="h-8" />
-        </template>
-    </UCard>
+    </footer>
 </template>
+
+<style scoped>
+.two-column-layout {
+    display: flex;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+
+main {
+    flex-basis: 80%;
+    margin-top: 10px;
+    padding: 20px;
+}
+</style>
