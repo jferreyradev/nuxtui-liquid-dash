@@ -1,5 +1,8 @@
 
 <script setup>
+
+const { tipoliq, nroadi, month, year, per } = useFilterData();
+
 const liq = [{
     name: 'Mensual',
     value: '1'
@@ -18,20 +21,25 @@ const liq = [{
     disabled: true
 }]
 
-const liqSelected = ref(1)
-const nroAdi = ref(0)
+const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
-const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo']
-const date = new Date()
-const month = ref(months[date.getMonth()])
-const year = ref(date.getFullYear())
 
 const handleClick = ()=>{
-    const nmonth = months.indexOf(month.value)+1
-    console.log(liqSelected.value, nroAdi.value, nmonth , year.value )
-    const d = new Date(year.value, nmonth, 1 )
-    console.log(d.toLocaleDateString())
+    const nmonth = months.indexOf(localmonth.value)+1
+    console.log(nmonth, year.value);
+
+    tipoliq.value = liqSelected.value
+    month.value = nmonth
+
+    console.log(tipoliq.value, nroadi.value, month.value, year.value, per.value)
 }
+
+const liqSelected = ref({
+    name: 'Mensual',
+    value: '1'
+})
+
+const localmonth = ref(months[month.value])
 
 </script>
 
@@ -43,15 +51,15 @@ const handleClick = ()=>{
         </div>        
         <div class="m-2">
             <label for="adi">Nro. Adicional</label>
-            <UInput v-model="nroAdi" id="adi" />
+            <UInput v-model="nroadi" id="adi" />
         </div>
         <div class="m-2">
             <label for="periodo">Periodo</label>
             <div class="flex" id="periodo">
-                <USelect v-model="month" :options="months" />
+                <USelect v-model="localmonth" :options="months" />
                 <UInput v-model="year" type="number"></UInput>
             </div>
-        </div>
+        </div> 
         <UButton class="m-2" @click="handleClick">enviar</UButton>
     </UContainer>
 </template>

@@ -22,14 +22,6 @@ const isAuthenticated = useCookie('is-authenticated')
 </template>
 
 <style scoped>
-.two-column-layout {
-    display: flex;
-
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
-}
-
 
 main {
     flex-basis: 80%;
